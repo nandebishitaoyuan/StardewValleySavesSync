@@ -38,6 +38,15 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    implementation("com.alibaba:transmittable-thread-local:2.8.1")
+
+    // 生成token
+    implementation("io.jsonwebtoken:jjwt:0.12.6")
+    implementation("io.jsonwebtoken:jjwt-api:0.12.6")
+
+    // 糊涂工具包
+    implementation("cn.hutool:hutool-all:5.8.34")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

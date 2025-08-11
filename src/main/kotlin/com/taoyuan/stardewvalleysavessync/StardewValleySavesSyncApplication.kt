@@ -1,4 +1,4 @@
-package com.toayuan.stardewvalleysavessync
+package com.taoyuan.stardewvalleysavessync
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
