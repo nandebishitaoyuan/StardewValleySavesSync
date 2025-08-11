@@ -1,3 +1,5 @@
+server:
+  port: 15900
 spring:
   application:
     name: stardew_valley_saves_sync
