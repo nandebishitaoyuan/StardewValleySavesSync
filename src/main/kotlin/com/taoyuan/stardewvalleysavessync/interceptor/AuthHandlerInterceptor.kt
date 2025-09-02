@@ -64,11 +64,9 @@ class AuthHandlerInterceptor: HandlerInterceptor {
         val claims: Claims
         try {
             claims = JwtUtil.parseToken(jwtToken)
-            val userStr: String? = claims["user"] as String?
-            val jsonObj = JSONUtil.parseObj(userStr)
+            val jsonObj = JSONUtil.parseObj(claims["user"])
             val user = jsonObj.toBean(User::class.java)
             UserContext.setUser(user)
-
         } catch (e: Exception) {
             log.error("解析token 错误  token {} ", jwtToken, e)
             throw AuthException("token校验失败", e)
