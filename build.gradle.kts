@@ -46,7 +46,6 @@ dependencies {
 
     // 糊涂工具包
     implementation("cn.hutool:hutool-all:5.8.34")
-
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")

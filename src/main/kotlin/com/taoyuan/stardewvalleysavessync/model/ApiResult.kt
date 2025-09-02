@@ -35,6 +35,10 @@ class ApiResult<T> (
             return ApiResult(20000, msg)
         }
 
+        fun <T> failure(code: Int, msg: String): ApiResult<T> {
+            return ApiResult(code, msg)
+        }
+
         fun <T> failure(dada: T): ApiResult<T> {
             return ApiResult(20000, "failure", dada)
         }

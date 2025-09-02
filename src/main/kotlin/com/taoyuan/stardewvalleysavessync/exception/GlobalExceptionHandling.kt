@@ -28,7 +28,7 @@ class GlobalExceptionHandling {
     fun handleLoginException(e: AuthException): ApiResult<Unit> {
         logger.error("认证异常", e)
         logger.error("❌认证异常，uri：{}，异常信息：{}", RequestUtil().getRequestInfo(), e.message)
-        return ApiResult.failure(e.message)
+        return ApiResult.failure(40001, e.message)
     }
 
     @ResponseBody
