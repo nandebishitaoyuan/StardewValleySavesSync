@@ -1,5 +1,6 @@
 package com.taoyuan.stardewvalleysavessync.service.impl
 
+import cn.hutool.poi.excel.sax.ElementName
 import com.taoyuan.stardewvalleysavessync.context.UserContext
 import com.taoyuan.stardewvalleysavessync.model.SaveVo
 import com.taoyuan.stardewvalleysavessync.service.SavesSyncService
@@ -32,40 +33,18 @@ class SavesSyncServiceImpl : SavesSyncService {
     /**
      * 保存存档
      */
-    override fun save(files: Array<MultipartFile>) {
-        if (files.isEmpty()) return
-
-        // 1. 获取根目录名称
-        val firstPath = files[0].originalFilename ?: return
-        val rootName = firstPath.substringBefore("/")
-
-        // 2. 临时目录
-        val tempDirPath = System.getProperty("java.io.tmpdir") + "/uploadDir_" + System.currentTimeMillis()
-        val tempDir = File(tempDirPath)
-        tempDir.mkdirs()
-
+    override fun save(file: MultipartFile) {
+        if (file.isEmpty) return
         try {
-            // 3. 保存上传的文件到临时目录
-            for (file in files) {
-                val relativePath = file.originalFilename ?: file.name
-                val targetFile = File(tempDir, relativePath)
-                targetFile.parentFile.mkdirs()
-                file.transferTo(targetFile)
+            val filePath = "$rootDir/${UserContext.getUser().id}/${file.originalFilename}"
+            val savePath = File(filePath)
+            // 判断路径是否存在
+            if (!savePath.exists()) {
+                savePath.parentFile.mkdirs()
             }
-
-            val sourceDir = File(tempDirPath + "/$rootName")
-            if (!sourceDir.exists() || !sourceDir.isDirectory) {
-                println("源目录不存在或不是文件夹")
-                return
-            }
-
-            val zipFilePath = "$rootDir/${UserContext.getUser().id}/$rootName.zip"
-            ZipUtil.zip(sourceDir, zipFilePath)
+            file.transferTo(savePath)
         } catch (e: Exception) {
             e.printStackTrace()
-        } finally {
-            // 5. 清理临时目录
-            tempDir.deleteRecursively()
         }
     }
 

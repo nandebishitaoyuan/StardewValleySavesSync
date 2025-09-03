@@ -1,5 +1,6 @@
 package com.taoyuan.stardewvalleysavessync.controller
 
+import cn.hutool.core.io.FileUtil.file
 import com.taoyuan.stardewvalleysavessync.model.SaveVo
 import com.taoyuan.stardewvalleysavessync.service.SavesSyncService
 import jakarta.annotation.Resource
@@ -17,10 +18,9 @@ class SyncController(
 ) {
 
     @PostMapping("/save")
-    fun save(@RequestPart("files") files: Array<MultipartFile>) {
-        savesSyncService.save(files)
+    fun save(@RequestPart("file") file: MultipartFile) {
+        savesSyncService.save(file)
     }
-
 
     @PostMapping("/list")
     fun list(): List<SaveVo> {

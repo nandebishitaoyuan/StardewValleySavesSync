@@ -8,7 +8,7 @@ interface SavesSyncService {
     /**
      * 保存存档
      */
-    fun save(files: Array<MultipartFile>)
+    fun save(file: MultipartFile)
 
     /**
      * 获取存档列表
