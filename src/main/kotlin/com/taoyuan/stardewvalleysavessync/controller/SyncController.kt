@@ -22,17 +22,17 @@ class SyncController(
         savesSyncService.save(file)
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     fun list(): List<SaveVo> {
         return savesSyncService.getSaveList()
     }
 
-    @PostMapping("/delete")
-    fun delete(@RequestPart("name") name: String) {
+    @GetMapping("/delete")
+    fun delete(@RequestParam("name") name: String) {
         savesSyncService.deleteSave(name)
     }
 
-    @PostMapping("/download")
+    @GetMapping("/download")
     fun download(@RequestParam("name") name: String, response: HttpServletResponse) {
         val save: File = savesSyncService.getSave(name)
         response.contentType = "application/octet-stream"
