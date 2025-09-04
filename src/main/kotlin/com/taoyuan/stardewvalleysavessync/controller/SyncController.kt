@@ -35,6 +35,7 @@ class SyncController(
     @GetMapping("/download")
     fun download(@RequestParam("name") name: String, response: HttpServletResponse) {
         val save: File = savesSyncService.getSave(name)
+        response.setContentLengthLong(save.length())
         response.contentType = "application/octet-stream"
         response.setHeader("Content-Disposition", "attachment; filename=${save.name}")
         response.outputStream.write(save.readBytes())
