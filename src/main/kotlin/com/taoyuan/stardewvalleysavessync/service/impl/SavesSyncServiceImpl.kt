@@ -73,7 +73,10 @@ class SavesSyncServiceImpl : SavesSyncService {
      * 删除存档
      */
     override fun deleteSave(name: String) {
-
+        val file = File("$rootDir/${UserContext.getUser().id}/$name")
+        if (file.exists() && file.isFile) {
+            file.delete()
+        }
     }
 
     override fun getSave(name: String): File {
